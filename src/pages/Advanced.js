@@ -1,36 +1,34 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { meta } from 'react-pages'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { set } from '../redux/advanced'
 
 import './Advanced.css'
 
-@meta(() => ({
-	title: 'Advanced'
-}))
-@connect(({ advanced }) => ({
-	value : advanced.value
-}), {
-	set
-})
-export default class Advanced extends Component {
-	render() {
-		const { value, set } = this.props
-		return (
+export default function Advanced() {
+	const dispatch = useDispatch()
+
+	const value = useSelector(state => state.advanced.value)
+
+	return (
+		<div>
 			<div>
-				<div>
-					This is an advanced implementation of a counter.
-				</div>
-				<div className="counter">
-					{value}
-					<button
-						type="button"
-						onClick={() => set(value + 1)}>
-						Increment
-					</button>
-				</div>
+				This is an advanced implementation of a counter.
 			</div>
-		)
+			<div className="counter">
+				{value}
+				<button
+					type="button"
+					onClick={() => dispatch(set(value + 1))}>
+					Increment
+				</button>
+			</div>
+		</div>
+	)
+}
+
+Advanced.meta = () => {
+	return {
+		title: 'Advanced'
 	}
 }

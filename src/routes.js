@@ -1,13 +1,12 @@
-import React from 'react'
-import { Route } from 'react-pages'
-
 import App from './pages/App'
 import Basic from './pages/Basic'
 import Advanced from './pages/Advanced'
 
-export default (
-  <Route path="/" Component={ App }>
-    <Route Component={ Basic }/>
-    <Route path="advanced" Component={ Advanced }/>
-  </Route>
-)
+export default [{
+	path: '/',
+	Component: App,
+	children: [
+		{ Component: Basic },
+		{ Component: Advanced, path: 'advanced' }
+	]
+}]
